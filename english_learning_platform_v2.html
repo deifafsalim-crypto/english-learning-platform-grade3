@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#667eea">
+  <title>منصة الصف الثالث للغة الإنجليزية — الفصل الأول</title>
+  <link rel="stylesheet" href="platform_v2.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">تجاوز إلى المحتوى</a>
+  <header class="topbar">
+    <div><h1>🌟 منصة اللغة الإنجليزية</h1><p>الصف الثالث — الفصل الأول</p></div>
+    <div class="top-actions"><button id="audio-stop" type="button">⏹ إيقاف الصوت</button><button id="audio-slow" type="button" aria-pressed="false">🐢 نطق بطيء</button></div>
+  </header>
+  <nav class="main-nav" aria-label="التنقل الرئيسي">
+    <button data-page="home" class="active">🏠 الرئيسية</button><button data-page="learn">📚 التعلّم</button><button data-page="stories">📖 القصص</button><button data-page="games">🎮 الألعاب</button><button data-page="project">🎨 المشروع</button><button data-page="diary">📔 دفتري</button><button data-page="progress">📊 التقدم</button>
+  </nav>
+  <main id="main" tabindex="-1">
+    <section id="home" class="page active" aria-labelledby="home-title"><div class="hero"><h2 id="home-title">أهلًا بك في رحلة الفصل الأول!</h2><p>تعلّم من Welcome إلى الوحدات الأربع والملحقات، وتدرّب خطوة بخطوة.</p></div><div id="home-summary" class="stats"></div><h3>مسار التعلّم</h3><div id="module-grid" class="card-grid"></div><aside class="notice">🔒 تُحفظ بياناتك محليًا على هذا الجهاز فقط، ولا توجد مزامنة سحابية.</aside></section>
+    <section id="learn" class="page" aria-labelledby="learn-title"><h2 id="learn-title">الدروس والاختبارات</h2><div class="split"><aside><label for="module-select">اختر القسم</label><select id="module-select"></select><div id="lesson-list" class="lesson-list"></div></aside><article id="lesson-view" tabindex="-1"></article></div></section>
+    <section id="stories" class="page" aria-labelledby="stories-title"><h2 id="stories-title">القراءات والقصص</h2><div id="story-list" class="chip-row"></div><article id="story-view" tabindex="-1"></article></section>
+    <section id="games" class="page" aria-labelledby="games-title"><h2 id="games-title">ساحة الألعاب</h2><p>كل لعبة لها جولة كاملة؛ لا تُحسب إلا بعد إنهائها.</p><div id="game-cards" class="card-grid"></div><article id="game-area" tabindex="-1"></article></section>
+    <section id="project" class="page" aria-labelledby="project-title"><h2 id="project-title">مشروع قائمة إفطار عُمانية</h2><div id="project-app"></div></section>
+    <section id="diary" class="page" aria-labelledby="diary-title-page"><h2 id="diary-title-page">دفتري اليومي</h2><div id="diary-app"></div></section>
+    <section id="progress" class="page" aria-labelledby="progress-title"><h2 id="progress-title">التقدم وProgress Path</h2><div id="progress-app"></div></section>
+  </main>
+  <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <dialog id="confirm-dialog"><form method="dialog"><p id="confirm-message"></p><div class="actions"><button value="cancel">إلغاء</button><button value="confirm" class="danger">تأكيد</button></div></form></dialog>
+  <noscript>تحتاج المنصة إلى تفعيل JavaScript لتعمل الأنشطة.</noscript>
+  <script src="platform_v2_data.js"></script><script src="platform_v2_core.js"></script><script src="platform_v2.js"></script>
+</body>
+</html>

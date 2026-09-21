@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة تعلم اللغة الإنجليزية - Unit 1: It's a Happy Day!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            direction: rtl;
+            text-align: right;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-bar h1 {
+            color: #667eea;
+            font-size: 1.3rem;
+            flex: 1;
+        }
+
+        .nav-bar button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .page {
+            display: none;
+            flex: 1;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Home Page */
+        .welcome-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .welcome-card h1 {
+            color: #667eea;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-card p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 0.5rem 0;
+        }
+
+        .welcome-card .subtitle {
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            background: white;
+            border: none;
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            background: #f8f8ff;
+        }
+
+        .nav-btn .emoji {
+            font-size: 2.8rem;
+        }
+
+        .nav-btn .desc {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 400;
+        }
+
+        /* Lessons */
+        .lessons-page h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .lessons-nav {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .lesson-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 0.75rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .lesson-btn:hover {
+            border-color: #667eea;
+        }
+
+        .lesson-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .lesson-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .lesson-container h2 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-container > p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .vocab-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.3rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        .vocab-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-card h3 {
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+
+        .ar-text {
+            font-size: 0.8rem;
+            opacity: 0.95;
+            margin-bottom: 0.8rem;
+        }
+
+        .vocab-card button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .vocab-card button:hover {
+            background: #f0f0f0;
+        }
+
+        .lesson-activity {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .lesson-activity h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .grammar-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .grammar-rule {
+            background: #f5f5f5;
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .grammar-rule h4 {
+            color: #667eea;
+            margin-bottom: 0.8rem;
+        }
+
+        .grammar-rule p {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .time-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 1.3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .time-card:hover {
+            background: #f8f8ff;
+            transform: translateY(-4px);
+        }
+
+        .time-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-card h3 {
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+            color: #333;
+        }
+
+        .time-card button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        /* Games */
+        .game-container {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .game-instructions {
+            text-align: center;
+            color: #666;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+
+        .matching-game {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .matching-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .matching-item {
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.2s;
+            border: 3px solid transparent;
+        }
+
+        .matching-item:hover {
+            border-color: #667eea;
+            background: #f0f0f0;
+        }
+
+        .matching-item.selected {
+            border-color: #667eea;
+            background: #e8e8ff;
+        }
+
+        .matching-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .matching-text {
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            font-weight: 500;
+            color: #333;
+            border: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .question-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 2px solid #ddd;
+        }
+
+        .question-item p {
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            color: #333;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f0f0f0;
+        }
+
+        .option-btn.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .option-btn.wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        /* Story */
+        .story-scenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .story-scene {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .scene-number {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+        }
+
+        .scene-action {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+
+        .scene-en {
+            font-size: 0.95rem;
+            margin: 0.75rem 0;
+            line-height: 1.6;
+        }
+
+        .scene-ar {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .story-scene button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .story-scene button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Diary */
+        .diary-container, .project-container, .progress-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .diary-container h2, .project-container h2, .progress-container h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .diary-form textarea, .project-form input, .project-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+            margin: 1rem 0;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .diary-form textarea:focus, .project-form input:focus, .project-form textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .diary-form button, .project-form button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .diary-form button:hover, .project-form button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Guide */
+        .guide-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .guide-section {
+            margin-bottom: 2rem;
+        }
+
+        .guide-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .guide-section p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .home-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grammar-box {
+                grid-template-columns: 1fr;
+            }
+
+            .matching-game {
+                grid-template-columns: 1fr;
+            }
+
+            .story-scenes {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-bar h1 {
+                flex: none;
+                width: 100%;
+            }
+        }
+
+        .diagnostic-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .phonics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .phonics-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 1.3rem;
+            text-align: center;
+        }
+
+        .phonics-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .phonics-card ul {
+            list-style: none;
+            text-align: right;
+        }
+
+        .phonics-card li {
+            padding: 0.5rem 0;
+            color: #555;
+        }
+
+        .phonics-card button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="nav-bar">
+            <h1>📚 منصة تعلم الإنجليزية</h1>
+            <button onclick="showPage('home')" style="background: #667eea; color: white;">← الرئيسية</button>
+        </div>
+
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="content-wrapper">
+                <div class="welcome-card">
+                    <h1>🌟 مرحباً بك في منصة تعلم اللغة الإنجليزية</h1>
+                    <p>الوحدة الأولى: It's a Happy Day!</p>
+                    <p className="subtitle">للصف الثالث - الفصل الدراسي الأول</p>
+                </div>
+
+                <div class="home-grid">
+                    <button class="nav-btn" onclick="showPage('diagnostic')">
+                        <span class="emoji">🎯</span>
+                        جاهز للمغامرة؟
+                        <span class="desc">تشخيص البداية</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('lessons')">
+                        <span class="emoji">📚</span>
+                        دروسي
+                        <span class="desc">6 دروس رئيسية</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('games')">
+                        <span class="emoji">🎮</span>
+                        ساحة الألعاب
+                        <span class="desc">ألعاب تفاعلية</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('story')">
+                        <span class="emoji">📖</span>
+                        وقت القصة
+                        <span class="desc">Atomic is Colorful</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('clock')">
+                        <span class="emoji">⏰</span>
+                        ساعة يومي
+                        <span class="desc">قراءة الساعة</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('diary')">
+                        <span class="emoji">📔</span>
+                        دفتر يومي
+                        <span class="desc">اكتب روتينك</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('breakfast')">
+                        <span class="emoji">🍽️</span>
+                        قائمة إفطاري
+                        <span class="desc">مشروع الفطور</span>
+                    </button>
+                    
+                    <button class="nav-btn" onclick="showPage('progress')">
+                        <span class="emoji">📊</span>
+                        مراجعتي
+                        <span class="desc">تتبع التقدم</span>
+                    </button>
+
+                    <button class="nav-btn" onclick="showPage('guide')">
+                        <span class="emoji">📋</span>
+                        دليل المعلم
+                        <span class="desc">نصائح تعليمية</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagnostic Page -->
+        <div id="diagnostic" class="page">
+            <div class="content-wrapper">
+                <div class="diagnostic-content">
+                    <h1>🎯 جاهز للمغامرة؟</h1>
+                    <p style="margin: 1rem 0; color: #666;">دعنا نعرف مستواك الحالي لنساعدك بشكل أفضل 😊</p>
+                    
+                    <div class="question-item">
+                        <p><strong>1. هل تعرف كيف تقول "استيقظ" بالإنجليزية؟</strong></p>
+                        <div class="button-group">
+                            <button class="option-btn">get up ✅</button>
+                            <button class="option-btn">wake up</button>
+                            <button class="option-btn">stand up</button>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <p><strong>2. كيف تقول "نحن نلعب" باستخدام don't؟</strong></p>
+                        <div class="button-group">
+                            <button class="option-btn">We play</button>
+                            <button class="option-btn">We don't play ✅</button>
+                            <button class="option-btn">We not play</button>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <p><strong>3. متى نتناول الإفطار؟</strong></p>
+                        <div class="button-group">
+                            <button class="option-btn">in the morning ✅</button>
+                            <button class="option-btn">in the afternoon</button>
+                            <button class="option-btn">at night</button>
+                        </div>
+                    </div>
+
+                    <button onclick="alert('رائع! أنت جاهز للبدء 🎉')" style="margin-top: 1rem; background: #4CAF50; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%;">إنهاء التشخيص</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lessons Page -->
+        <div id="lessons" class="page">
+            <div class="content-wrapper">
+                <h1 style="color: white; margin-bottom: 1.5rem;">📚 دروسي</h1>
+                
+                <div class="lessons-nav">
+                    <button class="lesson-btn active" onclick="switchLesson(1, this)">الدرس 1</button>
+                    <button class="lesson-btn" onclick="switchLesson(2, this)">الدرس 2</button>
+                    <button class="lesson-btn" onclick="switchLesson(3, this)">الدرس 3</button>
+                    <button class="lesson-btn" onclick="switchLesson(4, this)">الدرس 4</button>
+                    <button class="lesson-btn" onclick="switchLesson(5, this)">الدرس 5</button>
+                    <button class="lesson-btn" onclick="switchLesson(6, this)">الدرس 6</button>
+                </div>
+
+                <div id="lesson-content">
+                    <!-- Lesson 1 -->
+                    <div id="lesson-1" class="lesson-container">
+                        <h2>الدرس 1: اكتشف أنشطتك اليومية</h2>
+                        <p>تعلم أسماء 10 أنشطة يومية مهمة</p>
+                        
+                        <div class="vocab-grid">
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🛏️</div>
+                                <h3>get up</h3>
+                                <p class="ar-text">استيقظ</p>
+                                <button onclick="speak('get up')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🤲</div>
+                                <h3>pray</h3>
+                                <p class="ar-text">صلِّ</p>
+                                <button onclick="speak('pray')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🍽️</div>
+                                <h3>have breakfast</h3>
+                                <p class="ar-text">تناول الفطور</p>
+                                <button onclick="speak('have breakfast')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🚌</div>
+                                <h3>go to school</h3>
+                                <p class="ar-text">اذهب للمدرسة</p>
+                                <button onclick="speak('go to school')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🎨</div>
+                                <h3>have art lessons</h3>
+                                <p class="ar-text">درس الفن</p>
+                                <button onclick="speak('have art lessons')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">⚽</div>
+                                <h3>play</h3>
+                                <p class="ar-text">العب</p>
+                                <button onclick="speak('play')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🍜</div>
+                                <h3>have lunch</h3>
+                                <p class="ar-text">تناول الغداء</p>
+                                <button onclick="speak('have lunch')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">📝</div>
+                                <h3>do homework</h3>
+                                <p class="ar-text">اعمل الواجب</p>
+                                <button onclick="speak('do homework')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">🍲</div>
+                                <h3>have dinner</h3>
+                                <p class="ar-text">تناول العشاء</p>
+                                <button onclick="speak('have dinner')">🔊 استمع</button>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-emoji">😴</div>
+                                <h3>go to bed</h3>
+                                <p class="ar-text">نم</p>
+                                <button onclick="speak('go to bed')">🔊 استمع</button>
+                            </div>
+                        </div>
+
+                        <div class="lesson-activity">
+                            <h3>نشاط: اختر الصورة الصحيحة</h3>
+                            <div class="game-instructions">اضغط على الأيقونة المناسبة للعبارة</div>
+                            <div class="game-container">
+                                <div class="question-item">
+                                    <p><strong>استيقظ</strong></p>
+                                    <div class="button-group" style="gap: 0.5rem;">
+                                        <button class="option-btn" onclick="checkAnswer(true)">🛏️ ✅</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">🍽️</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">📝</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 2 -->
+                    <div id="lesson-2" class="lesson-container" style="display: none;">
+                        <h2>الدرس 2: الإثبات والنفي</h2>
+                        <p>تعلم كيفية الإثبات والنفي باستخدام I و We</p>
+                        
+                        <div class="grammar-box">
+                            <div class="grammar-rule">
+                                <h4>✅ الإثبات (Affirmative)</h4>
+                                <p><strong>I play.</strong> - أنا ألعب.</p>
+                                <p><strong>We have lunch.</strong> - نحن نتناول الغداء.</p>
+                                <p><strong>I go to school.</strong> - أنا أذهب للمدرسة.</p>
+                            </div>
+                            
+                            <div class="grammar-rule">
+                                <h4>❌ النفي (Negative)</h4>
+                                <p><strong>I don't play.</strong> - أنا لا ألعب.</p>
+                                <p><strong>We don't have lunch.</strong> - نحن لا نتناول الغداء.</p>
+                                <p><strong>I don't go to school.</strong> - أنا لا أذهب للمدرسة.</p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-activity">
+                            <h3>نشاط: اختر الجملة الصحيحة</h3>
+                            <div class="game-container">
+                                <div class="question-item">
+                                    <p><strong>I play football.</strong> (إثبات أم نفي؟)</p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(true)">✅ إثبات</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">❌ نفي</button>
+                                    </div>
+                                </div>
+
+                                <div class="question-item">
+                                    <p><strong>We don't go to school today.</strong> (إثبات أم نفي؟)</p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(false)">✅ إثبات</button>
+                                        <button class="option-btn" onclick="checkAnswer(true)">❌ نفي</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 3 -->
+                    <div id="lesson-3" class="lesson-container" style="display: none;">
+                        <h2>الدرس 3: فترات اليوم</h2>
+                        <p>تعلم فترات اليوم المختلفة والأنشطة في كل فترة</p>
+                        
+                        <div class="time-grid">
+                            <div class="time-card">
+                                <div class="time-emoji">🌅</div>
+                                <h3>in the morning</h3>
+                                <p class="ar-text">في الصباح</p>
+                                <button onclick="speak('in the morning')">🔊 استمع</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">☀️</div>
+                                <h3>in the afternoon</h3>
+                                <p class="ar-text">في بعد الظهر</p>
+                                <button onclick="speak('in the afternoon')">🔊 استمع</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">🌆</div>
+                                <h3>in the evening</h3>
+                                <p class="ar-text">في المساء</p>
+                                <button onclick="speak('in the evening')">🔊 استمع</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">🌙</div>
+                                <h3>at night</h3>
+                                <p class="ar-text">في الليل</p>
+                                <button onclick="speak('at night')">🔊 استمع</button>
+                            </div>
+                        </div>
+
+                        <div class="lesson-activity">
+                            <h3>نشاط: اربط الأنشطة بالفترات الصحيحة</h3>
+                            <div class="game-container">
+                                <div class="question-item">
+                                    <p><strong>نحن نستيقظ ونتناول الفطور</strong></p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(true)">🌅 in the morning</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">🌙 at night</button>
+                                    </div>
+                                </div>
+
+                                <div class="question-item">
+                                    <p><strong>نحن ننام</strong></p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(false)">☀️ in the afternoon</button>
+                                        <button class="option-btn" onclick="checkAnswer(true)">🌙 at night</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 4 -->
+                    <div id="lesson-4" class="lesson-container" style="display: none;">
+                        <h2>الدرس 4: السؤال والإجابة</h2>
+                        <p>تعلم كيفية السؤال عن الأنشطة اليومية والإجابة</p>
+                        
+                        <div class="lesson-activity">
+                            <h3>النمط الأساسي:</h3>
+                            <div class="grammar-rule">
+                                <p><strong>Q: When do you have breakfast?</strong></p>
+                                <p><strong>A: We have breakfast in the morning.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-activity">
+                            <h3>حوارات تفاعلية</h3>
+                            <div class="game-container">
+                                <div class="question-item">
+                                    <p className="speaker-a">👧 When do you have lunch?</p>
+                                    <p style="margin: 0.5rem 0; color: #667eea; font-weight: 600;">اختر الإجابة الصحيحة:</p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(true)">We have lunch in the afternoon.</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">We have lunch at night.</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 5 -->
+                    <div id="lesson-5" class="lesson-container" style="display: none;">
+                        <h2>الدرس 5: قراءة الساعة</h2>
+                        <p>تعلم كيفية قراءة الساعة والتعبير عن الوقت</p>
+                        
+                        <div class="lesson-activity">
+                            <h3>طرق التعبير عن الوقت:</h3>
+                            <div class="grammar-rule">
+                                <p><strong>6:00 →</strong> six o'clock</p>
+                                <p><strong>6:15 →</strong> quarter past six</p>
+                                <p><strong>6:30 →</strong> half past six</p>
+                                <p><strong>6:45 →</strong> quarter to seven</p>
+                            </div>
+                        </div>
+
+                        <div class="lesson-activity">
+                            <h3>نشاط: اختر الوقت الصحيح</h3>
+                            <div class="game-container">
+                                <div class="question-item">
+                                    <p><strong>الوقت: 3:30</strong></p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(false)">three o'clock</button>
+                                        <button class="option-btn" onclick="checkAnswer(true)">half past three</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">quarter past three</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 6 -->
+                    <div id="lesson-6" class="lesson-container" style="display: none;">
+                        <h2>الدرس 6: الصوتيات - wh و ph</h2>
+                        <p>تعلم نطق الحروف wh و ph والكلمات التي تحتويها</p>
+                        
+                        <div class="phonics-grid">
+                            <div class="phonics-card">
+                                <h3>🐋 wh</h3>
+                                <ul>
+                                    <li>whale (الحوت) 🐋</li>
+                                    <li>wheel (العجلة) 🎡</li>
+                                    <li>wheat (القمح) 🌾</li>
+                                    <li>white (أبيض) ⚪</li>
+                                </ul>
+                                <button onclick="speak('whale wheel wheat white')">🔊 استمع</button>
+                            </div>
+                            
+                            <div class="phonics-card">
+                                <h3>☎️ ph</h3>
+                                <ul>
+                                    <li>phone (الهاتف) ☎️</li>
+                                    <li>dolphin (الدلفين) 🐬</li>
+                                    <li>elephant (الفيل) 🐘</li>
+                                    <li>alphabet (الأبجدية) 🔤</li>
+                                </ul>
+                                <button onclick="speak('phone dolphin elephant alphabet')">🔊 استمع</button>
+                            </div>
+                        </div>
+
+                        <div class="lesson-activity">
+                            <h3>نشاط: صنّف الكلمات</h3>
+                            <div class="game-container">
+                                <div class="question-item">
+                                    <p><strong>elephant</strong> - تحتوي على أي حروف؟</p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(false)">wh</button>
+                                        <button class="option-btn" onclick="checkAnswer(true)">ph</button>
+                                    </div>
+                                </div>
+
+                                <div class="question-item">
+                                    <p><strong>wheel</strong> - تحتوي على أي حروف؟</p>
+                                    <div class="button-group">
+                                        <button class="option-btn" onclick="checkAnswer(true)">wh</button>
+                                        <button class="option-btn" onclick="checkAnswer(false)">ph</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Page -->
+        <div id="story" class="page">
+            <div class="content-wrapper">
+                <div class="lesson-container">
+                    <h2>📖 قصة: Atomic is Colorful!</h2>
+                    <p>اكتشف كيفية استمتع أتوميك برسم الألوان مع أصدقائه في درس الفن</p>
+                    
+                    <div class="story-scenes">
+                        <div class="story-scene">
+                            <div class="scene-number">مشهد 1</div>
+                            <div class="scene-action">🎨</div>
+                            <p class="scene-en">Lily and Jack have art lessons at school today. They paint flowers with colorful paints.</p>
+                            <p class="scene-ar">للي وجاك لديهما درس فن في المدرسة اليوم. يرسمان الزهور بألوان جميلة.</p>
+                            <button onclick="speak('Lily and Jack have art lessons at school today. They paint flowers with colorful paints.')">🔊 استمع</button>
+                        </div>
+
+                        <div class="story-scene">
+                            <div class="scene-number">مشهد 2</div>
+                            <div class="scene-action">😱</div>
+                            <p class="scene-en">Polly is on the table. Atomic looks at the paints. Oh no! What a mess!</p>
+                            <p class="scene-ar">بولي على الطاولة. أتوميك ينظر إلى الألوان. يا إلهي! ما أكثر هذا من فوضى!</p>
+                            <button onclick="speak('Polly is on the table. Atomic looks at the paints. Oh no! What a mess!')">🔊 استمع</button>
+                        </div>
+
+                        <div class="story-scene">
+                            <div class="scene-number">مشهد 3</div>
+                            <div class="scene-action">✨</div>
+                            <p class="scene-en">Blue and yellow make green! Atomic is colorful now! What a cool art lesson!</p>
+                            <p class="scene-ar">الأزرق والأصفر يصنعان الأخضر! أتوميك ملون الآن! ما درس فن رائع!</p>
+                            <button onclick="speak('Blue and yellow make green! Atomic is colorful now! What a cool art lesson!')">🔊 استمع</button>
+                        </div>
+                    </div>
+
+                    <div class="lesson-activity">
+                        <h3>نشاط: أسئلة الفهم</h3>
+                        <div class="game-container">
+                            <div class="question-item">
+                                <p><strong>متى يستيقظ الأطفال؟</strong></p>
+                                <div class="button-group">
+                                    <button class="option-btn" onclick="checkAnswer(true)">في الصباح - in the morning ✅</button>
+                                    <button class="option-btn" onclick="checkAnswer(false)">في الليل - at night</button>
+                                </div>
+                            </div>
+
+                            <div class="question-item">
+                                <p><strong>ماذا فعل أتوميك في النهاية؟</strong></p>
+                                <div class="button-group">
+                                    <button class="option-btn" onclick="checkAnswer(false)">رسم بقلم رصاص</button>
+                                    <button class="option-btn" onclick="checkAnswer(true)">أصبح ملون الألوان ✅</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diary Page -->
+        <div id="diary" class="page">
+            <div class="content-wrapper">
+                <div class="diary-container">
+                    <h2>📔 دفتر يومي</h2>
+                    <p>اكتب عن يومك باستخدام الكلمات والجمل التي تعلمتها</p>
+                    
+                    <div class="diary-form">
+                        <textarea id="diary-text" placeholder="اكتب يومك باستخدام الكلمات التي تعلمتها...&#10;مثال: I get up in the morning. We have breakfast. We go to school. We have art lessons. We play. We have lunch..."></textarea>
+                        <button onclick="speakDiary()">🔊 استمع لكتابتك</button>
+                        <button onclick="saveDiary()" style="margin-top: 1rem; background: #4CAF50;">💾 احفظ مسودتك</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breakfast Project -->
+        <div id="breakfast" class="page">
+            <div class="content-wrapper">
+                <div class="project-container">
+                    <h2>🍽️ قائمة إفطار عُمان</h2>
+                    <p>أنشئ قائمة إفطار تقليدية لعُمان واعرضها</p>
+                    
+                    <div class="project-form">
+                        <input id="title-input" type="text" placeholder="اسم القائمة" value="إفطار عُمان التقليدي">
+                        <textarea id="desc-input" placeholder="وصف القائمة" rows="3">في عُمان، يتناول الناس أطعمة تقليدية لذيذة في الصباح...</textarea>
+                        
+                        <h3 style="color: #667eea; margin-top: 1rem;">الأطعمة المقترحة:</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <label><input type="checkbox" checked> Khubz Rahhal (خبز الرقاق)</label>
+                            <label><input type="checkbox" checked> Eggs (بيض)</label>
+                            <label><input type="checkbox" checked> Beans (فاصوليا)</label>
+                            <label><input type="checkbox" checked> Date (تمر)</label>
+                            <label><input type="checkbox" checked> Honey (عسل)</label>
+                            <label><input type="checkbox" checked> Arabic Coffee (قهوة عربية)</label>
+                        </div>
+
+                        <button onclick="printProject()" className="print-btn" style="margin-top: 1.5rem; background: #667eea; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%;">طباعة القائمة 🖨️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Page -->
+        <div id="progress" class="page">
+            <div class="content-wrapper">
+                <div class="progress-container">
+                    <h2>📊 مراجعتي</h2>
+                    <p>تتبع تقدمك في تعلم الوحدة الأولى</p>
+                    
+                    <div class="progress-stats">
+                        <div class="stat-card">
+                            <h3>الدروس المكتملة</h3>
+                            <p class="stat-number">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>النقاط المكتسبة</h3>
+                            <p class="stat-number">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>أيام المتابعة</h3>
+                            <p class="stat-number">1</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>الكلمات المتعلمة</h3>
+                            <p class="stat-number">30+</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 10px; margin-top: 1.5rem;">
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">ملخص التقدم</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                                <p style="color: #666; margin-bottom: 0.5rem;">الدروس المتاحة</p>
+                                <p style="font-size: 1.5rem; color: #667eea; font-weight: 600;">6 دروس</p>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #4CAF50;">
+                                <p style="color: #666; margin-bottom: 0.5rem;">الألعاب المتاحة</p>
+                                <p style="font-size: 1.5rem; color: #4CAF50; font-weight: 600;">10+ ألعاب</p>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #FF9800;">
+                                <p style="color: #666; margin-bottom: 0.5rem;">قصص مشمولة</p>
+                                <p style="font-size: 1.5rem; color: #FF9800; font-weight: 600;">3 قصص</p>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #E91E63;">
+                                <p style="color: #666; margin-bottom: 0.5rem;">أنشطة إضافية</p>
+                                <p style="font-size: 1.5rem; color: #E91E63; font-weight: 600;">مشاريع متعددة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clock Page -->
+        <div id="clock" class="page">
+            <div class="content-wrapper">
+                <div class="lesson-container">
+                    <h2>⏰ ساعة يومي</h2>
+                    <p>تعلم كيفية قراءة الساعة والتعبير عن الأوقات المختلفة</p>
+                    
+                    <div class="lesson-activity">
+                        <h3>أوقات مهمة في يومك:</h3>
+                        <div class="time-grid" style="margin: 1.5rem 0;">
+                            <div class="time-card">
+                                <div class="time-emoji">🌅</div>
+                                <p style="font-weight: 600; margin: 0.5rem 0;">6:00 AM</p>
+                                <p style="color: #667eea; font-weight: 600;">Get up</p>
+                                <p style="font-size: 0.85rem; color: #999;">استيقظ</p>
+                                <button onclick="speak('six o\'clock')">🔊</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">🍽️</div>
+                                <p style="font-weight: 600; margin: 0.5rem 0;">7:00 AM</p>
+                                <p style="color: #667eea; font-weight: 600;">Have breakfast</p>
+                                <p style="font-size: 0.85rem; color: #999;">تناول الفطور</p>
+                                <button onclick="speak('seven o\'clock')">🔊</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">🚌</div>
+                                <p style="font-weight: 600; margin: 0.5rem 0;">8:00 AM</p>
+                                <p style="color: #667eea; font-weight: 600;">Go to school</p>
+                                <p style="font-size: 0.85rem; color: #999;">اذهب للمدرسة</p>
+                                <button onclick="speak('eight o\'clock')">🔊</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">🍜</div>
+                                <p style="font-weight: 600; margin: 0.5rem 0;">12:30 PM</p>
+                                <p style="color: #667eea; font-weight: 600;">Have lunch</p>
+                                <p style="font-size: 0.85rem; color: #999;">تناول الغداء</p>
+                                <button onclick="speak('half past twelve')">🔊</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">⚽</div>
+                                <p style="font-weight: 600; margin: 0.5rem 0;">3:00 PM</p>
+                                <p style="color: #667eea; font-weight: 600;">Play</p>
+                                <p style="font-size: 0.85rem; color: #999;">العب</p>
+                                <button onclick="speak('three o\'clock')">🔊</button>
+                            </div>
+                            <div class="time-card">
+                                <div class="time-emoji">😴</div>
+                                <p style="font-weight: 600; margin: 0.5rem 0;">9:00 PM</p>
+                                <p style="color: #667eea; font-weight: 600;">Go to bed</p>
+                                <p style="font-size: 0.85rem; color: #999;">نم</p>
+                                <button onclick="speak('nine o\'clock')">🔊</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guide Page -->
+        <div id="guide" class="page">
+            <div class="content-wrapper">
+                <div class="guide-container">
+                    <h1 style="color: #667eea; margin-bottom: 1.5rem;">📋 دليل المعلم وولي الأمر</h1>
+                    
+                    <div class="guide-section">
+                        <h3>🎯 أهداف الوحدة</h3>
+                        <p>بعد إكمال هذه الوحدة، يجب أن يتمكن الطفل من:</p>
+                        <ol style="line-height: 1.8; color: #555; margin-right: 1.5rem;">
+                            <li>تسمية 10 أنشطة يومية واستخدامها في جمل.</li>
+                            <li>التمييز بين فترات اليوم الأربع.</li>
+                            <li>وصف يومه باستخدام I و We.</li>
+                            <li>النفي باستخدام don't.</li>
+                            <li>السؤال عن الأنشطة بـ "When do you...?"</li>
+                            <li>السؤال عن الساعة وقراءتها.</li>
+                            <li>تمييز الحروف wh و ph في الكلمات.</li>
+                            <li>فهم القصص البسيطة وتسلسلها.</li>
+                            <li>تقديم مشروع قائمة إفطار بسيطة.</li>
+                        </ol>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3>📚 المحتوى الرئيسي</h3>
+                        <p><strong>الكلمات الأساسية (10):</strong> get up, pray, have breakfast, go to school, have art lessons, play, have lunch, do homework, have dinner, go to bed</p>
+                        <p><strong>فترات اليوم:</strong> in the morning, in the afternoon, in the evening, at night</p>
+                        <p><strong>التراكيب النحوية:</strong> I/We + فعل، I/We + don't + فعل</p>
+                        <p><strong>الأسئلة:</strong> When do you...?  What time is it?</p>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3>💡 نصائح للتعليم الفعال</h3>
+                        <p><strong>1. استخدم الصور والإيماءات:</strong> عرّف الأنشطة من خلال صور واضحة وحركات جسدية. الأطفال يتعلمون بصريًا وحركيًا.</p>
+                        <p><strong>2. كرّر باستمرار:</strong> المراجعة هي مفتاح التعلم. كرر الكلمات والجمل أسبوعيًا.</p>
+                        <p><strong>3. اجعلها ممتعة:</strong> استخدم الألعاب والقصص والأنشطة التفاعلية لإبقاء انتباه الأطفال.</p>
+                        <p><strong>4. انطقها بشكل صحيح:</strong> الاستماع إلى نطق صحيح أساسي. استخدم الزر 🔊 للاستماع.</p>
+                        <p><strong>5. شجّع المشاركة:</strong> دع الأطفال يتحدثون ولا تخافوا من الأخطاء.</p>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3>⏱️ اقتراح خطة تدريس</h3>
+                        <p><strong>الأسبوع 1:</strong> الدرس 1 + الدرس 2 (الأنشطة والإثبات/النفي)</p>
+                        <p><strong>الأسبوع 2:</strong> الدرس 3 + الدرس 4 (فترات اليوم والسؤال)</p>
+                        <p><strong>الأسبوع 3:</strong> الدرس 5 + الدرس 6 (الساعة والصوتيات)</p>
+                        <p><strong>الأسبوع 4:</strong> القصة + المشاريع + المراجعة</p>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3>🎓 تقويم التعلم</h3>
+                        <p><strong>استماع:</strong> اسأل الطفل عن أنشطته بـ "When do you...?" وانظر هل يستطيع الإجابة بشكل صحيح.</p>
+                        <p><strong>تحدث:</strong> اطلب من الطفل أن يصف يومه بجملتين على الأقل.</p>
+                        <p><strong>قراءة:</strong> تأكد من قدرته على فهم الجمل البسيطة.</p>
+                        <p><strong>كتابة:</strong> اطلب منه كتابة جمل بسيطة عن روتينه.</p>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3>🌍 ربط بالثقافة العمانية</h3>
+                        <p>الوحدة تتضمن إفطارًا تقليديًا عمانيًا (خبز الرقاق مع البيض والعسل). استخدم هذا لتعليم الطفل عن ثقافته وفي نفس الوقت ممارسة اللغة الإنجليزية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function switchLesson(num, btn) {
+            document.querySelectorAll('.lesson-container').forEach(l => l.style.display = 'none');
+            document.getElementById('lesson-' + num).style.display = 'block';
+            
+            document.querySelectorAll('.lesson-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            document.querySelector('#lesson-content').scrollIntoView();
+        }
+
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakDiary() {
+            const text = document.getElementById('diary-text').value;
+            if (text.trim()) {
+                speak(text);
+            } else {
+                alert('اكتب شيئًا أولًا! 📝');
+            }
+        }
+
+        function saveDiary() {
+            const text = document.getElementById('diary-text').value;
+            localStorage.setItem('diary-entry', text);
+            alert('تم حفظ مسودتك! 💾');
+        }
+
+        function printProject() {
+            const title = document.getElementById('title-input').value;
+            const desc = document.getElementById('desc-input').value;
+            
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<pre>');
+            printWindow.document.write(`
+${title}
+==================
+
+${desc}
+
+الأطعمة:
+- Khubz Rahhal (خبز الرقاق)
+- Eggs (بيض)
+- Beans (فاصوليا)
+- Date (تمر)
+- Honey (عسل)
+- Arabic Coffee (قهوة عربية)
+
+مصدر: منصة تعلم اللغة الإنجليزية
+            `);
+            printWindow.document.write('</pre>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        function checkAnswer(isCorrect) {
+            if (isCorrect) {
+                alert('✅ إجابة صحيحة! ممتاز! 🎉');
+            } else {
+                alert('❌ حاول مرة أخرى! 💪');
+            }
+        }
+
+        // Load diary on page load
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('diary-entry');
+            if (saved) {
+                document.getElementById('diary-text').value = saved;
+            }
+        });
+    </script>
+</body>
+</html>
